@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+  body {
+    padding: 100px;
+    width: 1000px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    color: #121212;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+</style>
+<title>A Quantitative Analysis of <i>Drosophila</i> Proboscis Extension Phenotypes Reveals Behavioral Subprograms</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+
+<body>
+
+    <h1 align="middle">A Quantitative Analysis of <i>Drosophila</i> Proboscis Extension Phenotypes Reveals Behavioral Subprograms</h1>
+    <h2 align="middle">Joie Zhou, Phil Shiu, Kristin Scott</h2>
+    <h2 align="middle">Department of Molecular and Cell Biology, University of California, Berkeley 94720</h2>
+
+    <br /><br />
+
+          <div>
+
+              <h2 align="middle">Introduction</h2>
+              <p>
+                  Feeding behavior is a critical component of animal survival. Due to its comparatively simple neural circuitry, the fruit fly <i>Drosophila melanogaster</i> is a powerful model to study feeding decisions. In <i>D. melanogaster</i>, feeding is achieved through proboscis extension, a behavior requiring coordination of multiple muscles in the proboscis, an appendage containing internal and external feeding organs. However, while taste sensing inputs and proboscis extension motor outputs have been identified, few of the interneurons that connect them are well characterized.
+              </p>
+              <div align="center">
+                  <table style="width=100%">
+                      <tr>
+                          <td align="middle">
+                              <img src="images/proboscis.png" width="480px" />
+                              <figcaption align="middle">From Gordon and Scott, 2009</figcaption>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <p>
+                  Members of the Scott Lab conducted a screen for neurons sufficient for a proboscis extension response (PER) and identified 30 different neural classes that influence this behavior. With video monitoring of optogenetic stimulation and analysis using a machine learning labelling software, DeepLabCut, my mentor and I were able to provide a quantitative description of behaviors associated with activation of these 30 neural classes.  These studies provide a quantitative analysis of proboscis extension that allow us to more accurately characterize and classify these neurons, giving insight into the subprograms that execute proboscis extension behavior and its variation.
+              </p>
+
+              <h2 align="middle">Methods</h2>
+              <p>
+                  I used split Gal-4/UAS-Chrimson lines for each neural class. To make the videos, I mounted flies onto glass slides which would be placed near infrared lights, a small wedged mirror, and under an infrared camera to ensure that the 635 nm laser stimulation would not obscure the image of the fly itself. For each video, the camera captured the reflection from the mirror, which shows the side of the fly. Video capture would start five seconds before the laser turned on and the laser would be turned off after ten seconds.
+              </p>
+              <p>
+                  My mentor and I trained DeepLabCut on the locations of the maxillary palp, labellum, eye and rostrum for select videos, then prompted labelling of the rest of the videos. Around ten videos were analyzed per neuron. Using Pandas, we transformed the output hdf files into DataFrames that contain the pixel coordinates for each body part for each frame. We used the relative location of each body part according to the position of the eye, to account for differences in magnification. We filtered raw data by eliminating extreme values likely due to mislabelling. To create the figures shown, we re-trained DeepLabCut two times on videos with inaccurate labels.
+              </p>
+
+              <h2 align="middle">Results</h2>
+              <p align="left" style="font-size:120%;">Figure 1: <b>Screening Split Gal-4 Lines Reveals at Least 29 Cell Types are Sufficient for Proboscis Extension</b></p>
+              <p>Using optogenetic stimulation, members of the Scott Lab found 75 split Gal-4 that induce a PER, comprising roughly 30 unique cell types. Functions of many of these cell types are unknown. How can we classify them?</p>
+              <div align="center">
+                  <table>
+                      <tr>
+                          <td align="middle">
+                              <img src="images/fig1.png" width="480px" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <p align="left" style="font-size:120%;">Figure 2: <b>Labelling of PERs using DeepLabCut</b></p>
+              <p>By training and retraining DeepLabCut, we were able to produce robust output videos that provide the body part location data indicated by the colored points. Proboscis parts could be tracked even when obscured by the legs (Video A) or in dark lighting (Video B).</p>
+              <div align="center">
+                  <table>
+                      <tr>
+                          <td align="middle">
+                              <figcaption align="left">A</figcaption>
+                              <iframe src="https://drive.google.com/file/d/13zHxzKhrtiY9OLGI0ta-5fpBnkfFh42m/preview" width="640" height="480"></iframe>
+
+                          </td>
+                          <td align="middle">
+                              <figcaption align="left">B</figcaption>
+                              <iframe src="https://drive.google.com/file/d/1NPSmpMdIHEZmWzifwjUjmOA8bh6ctHj3/preview" width="640" height="480"></iframe>
+
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <p align="left" style="font-size:120%;">Figure 3: <b>Quantitative analysis of proboscis extension phenotypes identifies variation between phenotypes generated by different cell types</b></p>
+              <p>Pictured are bar graphs of means for each PER neuron with 95% confidence interval error bars. Extension distance represents the distance in pixels between the labellum and eye, normalized by the distance between the top and front of the eye. Motor neuron E49 is seen to provoke one of the longest lasting extensions, but with the smallest angle. Dopamine modulation neurons seem to have high extension distance, angle, and duration. Difference in means among neurons show that PER neurons invoke varying PERs.</p>
+              <div align="center">
+                  <table style="width=150%">
+                      <tr>
+                          <td align="center">
+                              <img src="images/poster_fig_2.png" width="1200px" />
+                          </td>
+                      </tr>
+                      </br>
+                      <tr>
+                          <td align="center">
+                              <img src="images/poster_fig_2_1.png" width="1200px" />
+                          </td>
+                      </tr>
+                      </br>
+                      <tr>
+                          <td align="center">
+                              <img src="images/poster_fig_2_2.png" width="1200px" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <p align="left" style="font-size:120%;">Figure 4: <b>Two component PCA shows possible clusters for PER neurons</b></p>
+              <p>I performed two component principle component analysis on features including the duration, distance, angle, and frequency of proboscis extension. Points of the same color in Plot A are part of the same neural class, except for gray points. Many of the neurons expressed in the same class can be found in the same k-means cluster (Plot B). Plot C suggests second order PER neurons seem to cluster together and motor neurons have distinct phenotypes. These plots also show that PERs are varied and do not seem to follow only one phenotype.</p>
+              <div align="center">
+                  <table style="width=100%">
+                      <tr>
+                          <td align="middle">
+                              <figcaption align="left">A</figcaption>
+                              <img src="images/poster_fig_3_1.png" width="565px" />
+                          </td>
+                          <td align="middle">
+                              <figcaption align="left">B</figcaption>
+                              <img src="images/poster_fig_3_2.png" width="480px" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div align="center">
+                  <table style="margin-left:290px;">
+                      <tr>
+                          <td align="center">
+                              <figcaption align="left">C</figcaption>
+                              <img src="images/poster_fig_3_3.png" width="700px" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <p align="left" style="font-size:120%;">Figure 5: <b>Activation of NP1562 and Gr66a Inhibits Feeding</b></p>
+              <p>Though both a subset of NP1562 neurons and Gr66a caused proboscis extension during optogenetic stimulation, activation of either neuron greatly decreased drinking time of sucrose solution. Surprisingly, this suggests that NP1562 and Gr66a may be part of the bitter pathway, yet able to evoke PERs upon direct stimulation.</p>
+              <div align="center">
+                  <div align="center">
+                      <table style="margin-left:290px;">
+                          <tr>
+                              <td align="center">
+                                  <figcaption align="left">C</figcaption>
+                                  <img src="images/drink.jpg" width="700px" />
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+                  <table style="width=100%">
+
+                      <tr>
+                          <td align="middle">
+                              <figcaption align="left">NP1562-dfd</figcaption>
+                              <iframe src="https://drive.google.com/file/d/1803q_TbfEyfYO8rNxnpbITsrUZbg47zd/preview" width="640" height="480"></iframe>
+                          </td>
+                          <td align="middle">
+                              <figcaption align="left">Gr66a</figcaption>
+                              <iframe src="https://drive.google.com/file/d/1FxrwpxqQxK5zifT0_x9imP0Nl_Felwo5/preview" width="640" height="480"></iframe>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <p align="left" style="font-size:120%;">Figure 6: <b>Overlap of G2N-1 and NP-1562 stainings in <i>D. melanogaster</i></b></p>
+              <p>Multicolor flip-out staining (Panel A) of NP1562 revealed potential overlap with G2N-1, a second-order sweet gustatory neuron. In Panel B NP1562 is stained with R12C04 (G2N-1) to show this overlap. Panel C shows a staining of only NP1562-dfd. Overlap between these two neurons raises the possibility that NP1562 contains G2N-1.</p>
+              <div align="center">
+                  <table style="width=100%">
+                      <tr>
+                          <td align="middle">
+                              <figcaption align="left">A</figcaption>
+                              <img src="images/MCFO.png" width="480px" />
+                          </td>
+                          <td align="middle">
+                              <figcaption align="left">B</figcaption>
+                              <img src="images/overlap.png" width="537px" />
+                          </td>
+                      </tr>
+
+
+                  </table>
+              </div>
+              <div align="center">
+                  <table>
+                      <tr>
+                          <td align="middle">
+                              <figcaption align="left">C</figcaption>
+                              <img src="images/dfd.jpg" width="480px" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <p align="left" style="font-size:120%;">Figure 7: <b>Analysis of PER phenotypes identifies two third-order neurons that may be discrete subprograms of the entire proboscis extension phenotype </b></p>
+              <p>Sugar-sensing neurons activate second-order neurons (Horntail, NM, Zorro), which activate third-order neurons (roundup) that directly activate motor neuron 9. However, from video observation and clustering, Rattle and FDG-medial seem to instead induce a complementary phenotype of PER (activation of MN4). This raises the possibility that the proboscis extension circuit could be divided into multiple subprograms that add up to produce a full proboscis extension.</p>
+              <div align="center">
+                  <table>
+                      <tr>
+                          <td align="middle">
+                              <img src="images/fig7img.png" width="480px" />
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div align="center">
+                  <table style="width=100%">
+                      <tr>
+                          <td align="middle">
+                              <figcaption align="left">roundup</figcaption>
+                              <iframe src="https://drive.google.com/file/d/1NJ9y2fQbqrqMWcdZgGj1hfITQ95O2NZS/preview" width="640" height="480"></iframe>                          </td>
+                          <td align="middle">
+                              <figcaption align="left">Gr66a</figcaption>
+                              <iframe src="https://drive.google.com/file/d/1LKlr0p8AopdItiZ3pk-2Wes4jF0lSyR4/preview" width="640" height="480"></iframe>                          </td>
+                      </tr>
+                  </table>
+              </div>
+
+              <h2 align="middle">Conclusions</h2>
+              <ul>
+                  <li>
+                      There are many different proboscis extension phenotypes, including second-order, third-order, and bitter, though it is unknown what causes these differences.
+                  </li>
+                  <li>
+                      Neurons can be successfully clustered based on quantitative analysis of proboscis extension. We found that known neurons that exhibit different phenotypes end up in different clusters (FDG-medial (129, 132), TH-VUM (463, 462), MN9 (E49)). Often lines that come from the same neuron also end up in the same cluster.
+                  </li>
+                  <li>
+                      Bitter pathway neurons may cause a unique phenotype, as both Gr66a and NP1562 landed in the same cluster in PCA.
+                  </li>
+                  <li>
+                      There are still many unknown neurons that can be further studied, but clustering may give hints to their function.
+                  </li>
+              </ul>
+
+              <h2 align="middle">Future Developments</h2>
+              <ul>
+                  <li>
+                      Continue to check the data for outliers and retrain DeepLabCut on mislabelled videos.
+                  </li>
+                  <li>
+                      Film more videos to get more reliable clusters.
+                  </li>
+                  <li>
+                      Calculate more features to be used in clustering, including the angle between the maxillary palp, rostrum, and eye.
+                  </li>
+                  <li>
+                      Develop more algorithms to filter the data further in order to minimize artifacts.
+                  </li>
+                  <li>Perform feeding experiments on unknown neurons.</li>
+              </ul>
+
+          </div>
+</body>
+</html>
